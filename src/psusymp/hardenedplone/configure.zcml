@@ -1,0 +1,23 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="psusymp.hardenedplone">
+
+    <five:registerPackage package="." initialize=".initialize" />
+  
+    <!--
+        Abort all transactions that are going to commit to the database
+        while checking if there are object to commit first.
+
+        This will play nice with any potential forms that send mail
+        but do not commit to the database however does not cover the
+        case where code does a manual transaction.commit(). -->
+    <!-- <subscriber handler=".subscribers.readOnlyIfCommit" /> -->
+
+    <!--
+        Doom all transactions. This will prevent most mail from getting
+        sent out also. -->
+    <!-- <subscriber handler=".subscribers.readOnlyAll" /> -->
+
+</configure>
